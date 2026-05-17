@@ -3,11 +3,10 @@
 -- @client
 -- @name DiscordMessage
 -- @class hook
--- @param string name The user's name 
+-- @param string author The user's name
+-- @param Color color The user's color
 -- @param string message The user's message
-SF.hookAdd( "CFC_ChatTransit_RemoteMessageReceive", "DiscordMessage", function( _instance, addTextParams )
-    local user = string.sub( addTextParams[4], 2 ) -- Strip "@"
-    local message = string.sub( addTextParams[6], 3 ) -- Strip ": "
-
-    return true, { user, message }
+SF.hookAdd( "CFC_ChatTransit_RemoteMessageReceive", "DiscordMessage", function( instance, author, authorColor, message )
+    local color = instance.Types.Color.Wrap( authorColor )
+    return true, { author, color, message }
 end )
