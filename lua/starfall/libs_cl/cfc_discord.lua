@@ -6,7 +6,7 @@
 -- @param string author The user's name
 -- @param Color color The user's color
 -- @param string message The user's message
-SF.hookAdd( "CFC_ChatTransit_RemoteMessageReceive", "DiscordMessage", function( instance, author, authorColor, message )
-    local color = instance.Types.Color.Wrap( authorColor )
-    return true, { author, color, message }
+SF.hookAdd( "CFC_ChatTransit_RemoteMessageReceive", "DiscordMessage", function( instance, remoteMessage )
+    local color = instance.Types.Color.Wrap( remoteMessage.authorColor )
+    return true, { remoteMessage.author, color, remoteMessage.message }
 end )
